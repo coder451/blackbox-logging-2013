@@ -20,7 +20,24 @@ int main(int argc, char* argv[])
 	//     .instr_obj_MyFile.cpp_linenum
 
 	// Use a macro to hide the details
-	TRACEF(10, "main, using macro");
+	//TRACEF(10, "main, using macro");
+
+	{
+		__declspec(allocate(".trace"))
+			static Gbp::Tra::TraceSpec traceSpec_23 = {
+				 __FILE__, // file
+				 __LINE__, // line
+				 __FUNCTION__, // function
+				 10, // freq
+				 "main, using macro", // fmt
+				 Gbp::Tra::TRACESPEC_MAGIC, // n
+				 1, // paramCount
+				 0 // TraceDefn*
+		   };
+		traceSpec_23.pTraceDefn->trace();
+	}
+	(void)0;
+
 	int i = 99;
 	//TRACEF(10, "main: i=%d", i);
 
@@ -41,7 +58,7 @@ int main(int argc, char* argv[])
 
 	TRACEF(1, "A double: %f", 3.1415926535);
 
-	std::string fname(argv[1]);
+	std::string fname((argv[1] == nullptr)? "default" : argv[1]);
 	std::string ftname = fname + ".ttra";
 #pragma warning(push)
 #pragma warning(disable: 4996)
