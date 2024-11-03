@@ -6,3 +6,4 @@ Backup
 UpgradeLog.htm
 *.vcxproj.user
 *.vcproj
+Debug/
