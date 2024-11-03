@@ -7,3 +7,4 @@ UpgradeLog.htm
 *.vcxproj.user
 *.vcproj
 Debug/
+Release/
