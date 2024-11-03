@@ -63,7 +63,7 @@ namespace Gbp { namespace Tra {
 	struct IsPtrNotBasicCharPtr
 	{
 	private:
-		static const bool c1 = boost::is_pointer<T>::value;
+		static const bool c1 = std::is_pointer<T>::value;
 		static const bool c2 = !(IsBasicCharPtr<T>::value);
 	public:
 		static const bool value = c1 && c2;
