@@ -10,8 +10,8 @@ namespace Gbp { namespace Tra {
 	// Arithmetic types: assigned directly, except for float
 	template <typename T>
 	inline
-		typename boost::enable_if_c<
-		boost::is_arithmetic<T>::value && !boost::is_float<T>::value, 
+		typename std::enable_if<
+		std::is_arithmetic<T>::value && !std::is_floating_point<T>::value, 
 		void>::type
 	SaveValue(Slot_t*& p, const T& t)
 	{
@@ -22,8 +22,8 @@ namespace Gbp { namespace Tra {
 	// Float: change to a double
 	template <typename T>
 	inline
-		typename boost::enable_if_c<
-		boost::is_float<T>::value, 
+		typename std::enable_if<
+		std::is_floating_point<T>::value, 
 		void>::type
 		SaveValue(Slot_t*& p, const T& t)
 	{
@@ -36,7 +36,7 @@ namespace Gbp { namespace Tra {
 	// Pointer wrappers: assign the pointer directly
 	template <typename T>
 	inline 
-		typename boost::enable_if_c<
+		typename std::enable_if<
 		Gbp::Tra::IsPtrWrapper<T>::value, 
 		void>::type
 	SaveValue(Slot_t*& p, const T& t)
@@ -49,7 +49,7 @@ namespace Gbp { namespace Tra {
 	// std::string
 	template <typename T>
 	inline 
-		typename boost::enable_if_c<
+		typename std::enable_if<
 		Gbp::Tra::IsStdStringType<T>::value, 
 		void>::type
 		SaveValue(Slot_t*& p, const T& t)
@@ -66,10 +66,10 @@ namespace Gbp { namespace Tra {
 	// For everything else
 	template <typename T>
 	inline
-		typename boost::disable_if_c<
-			boost::is_arithmetic<T>::value || 
-			Gbp::Tra::IsPtrWrapper<T>::value ||
-			Gbp::Tra::IsStdStringType<T>::value, 
+		typename std::enable_if<
+			!(std::is_arithmetic<T>::value || 
+			  Gbp::Tra::IsPtrWrapper<T>::value ||
+			  Gbp::Tra::IsStdStringType<T>::value), 
 			void>::type
 		SaveValue(Slot_t*& p, const T& t)
 	{
