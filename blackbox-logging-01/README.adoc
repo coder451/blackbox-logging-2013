@@ -50,6 +50,12 @@ Run TraceTest.exe with no command line parameters to generate two
 files:
 
 * `default.btra`: the blackbox file.
-* `default.ttra`: a conventional log of blackbox operations
+* `default.ttra`: output from scanning the logging calls, 
+   used when interpreting the blackbox.
+
+Then run Trace2Log in the same directory as the blackbox files, passing
+`default` as the only command-line parameter.
+
+The results are printed on the terminal.
 
 
