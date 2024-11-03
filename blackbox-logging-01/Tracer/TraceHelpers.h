@@ -49,7 +49,7 @@ namespace Gbp { namespace Tra {
 		size_t>::type 
 		LengthOf(const T& t)
 	{
-		return SlotCount(t.size() * sizeof(t::value_type));
+		return SlotCount(t.size()) * sizeof(T::value_type);
 	}
 
 	template <typename T> inline 

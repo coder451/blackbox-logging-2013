@@ -58,6 +58,12 @@ int main(int argc, char* argv[])
 
 	TRACEF(1, "A double: %f", 3.1415926535);
 
+	std::vector<int> v(3);
+	v.push_back(1);
+	v.push_back(2);
+	v.push_back(3);
+	TRACEF(1, "A vector of int: %d", v);
+
 	std::string fname((argv[1] == nullptr)? "default" : argv[1]);
 	std::string ftname = fname + ".ttra";
 #pragma warning(push)
