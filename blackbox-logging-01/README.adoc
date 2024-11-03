@@ -1,5 +1,19 @@
 = Simplest blackbox tracing demo
 
+This example is somewhat advanced because it performs initializations
+for blackbox logging calls thoughout the program at the very beginning.
+This makes it unnecessary to perform initializations on the first time
+through. 
+This is a small win in terms of time.
+It also allows all the logging calls to be analyzed at program start
+whether or not they are ever actually used.
+This helps with identifying errors that might go unnoticed until
+an erroneous logging call is used in an error situation.
+So it helps to avoid the regret that comes from missing the data you 
+needed to find the problem.
+
+== Getting it running in 2024
+
 The original used some Boost includes:
 
 * `<boost/type_traits.hpp>` => `<type_traits>`
@@ -29,3 +43,13 @@ Changing a couple of things to 64 allows the sections to be located.
 
 Finally, fixing a simple error where it had been assumed that at least
 one command-line argument was given allowed it to run.
+
+== How to run
+
+Run TraceTest.exe with no command line parameters to generate two 
+files:
+
+* `default.btra`: the blackbox file.
+* `default.ttra`: a conventional log of blackbox operations
+
+
