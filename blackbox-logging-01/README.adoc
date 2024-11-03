@@ -1,0 +1,31 @@
+= Simplest blackbox tracing demo
+
+The original used some Boost includes:
+
+* `<boost/type_traits.hpp>` => `<type_traits>`
+* `<boost/utility/enable_if.hpp>` => `<type_traits>`
+
+Correspondingly, changed
+
+* `boost::true_type` to `std::true_type`
+* `boost::false_type` to `std::false_type`
+
+Also
+
+* `boost::disable_if_c` becomes `std::enable_if`, with the test negated.
+* `boost::is_arithmetic` with `std::is_arithmetic`
+* `boost::is_float` with `std::is_floating_point`
+* `boost::is_same` with `std::is_same`
+* `boost::is_enum` with `std::is_enum`
+* `boost::is_array`` with `std::is_array`
+* `boost::remove_const` with `std::remove_const`
+* `boost::remove_bounds` with `std::remove_extent`
+* `boost::is_pointer` with `std::is_pointer`
+
+The exe wasn't working after fixing errors and warnings.
+Possibly related to previously using 32-bit exe,
+because I saw IMAGE_NT_HEADERS32.
+Changing a couple of things to 64 allows the sections to be located.
+
+Finally, fixing a simple error where it had been assumed that at least
+one command-line argument was given allowed it to run.
