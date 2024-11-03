@@ -27,7 +27,7 @@ namespace Gbp { namespace Tra {
 		std::string value_;
 	};
 
-	struct TraceItemPtrLess: public std::binary_function<TraceItemPtrCRef, TraceItemPtrCRef, bool>
+	struct TraceItemPtrLess//: public std::binary_function<TraceItemPtrCRef, TraceItemPtrCRef, bool>
 	{
 		bool operator()(TraceItemPtrCRef a, TraceItemPtrCRef b)
 		{

@@ -62,10 +62,10 @@ bool FilterTrace(FILE* ft, FILE* fb, FILE* fout)
 
 	size_t dataSize = 0;
 	size_t defnCount = 0;
-	int n = fscanf(ft, "Tracer BufferSize=%10u DefnCount=%10u\n", &dataSize, &defnCount);
-	if(n != 2)
+	int n1 = fscanf(ft, "Tracer BufferSize=%10zu DefnCount=%10zu\n", &dataSize, &defnCount);
+	if(n1 != 2)
 	{
-		printf("Scan error in Tracer, n=%d\n", n);
+		printf("Scan error in Tracer, n=%d\n", n1);
 		return false;
 	}
 	itemDefns.reserve(defnCount);
@@ -85,24 +85,24 @@ bool FilterTrace(FILE* ft, FILE* fb, FILE* fout)
 		char function[500] = {};
 		char format[500] = {};
 
-		n = fscanf(ft, "TraceDefn offset=%10u sz=%10u last=%10u oldestIndex=%10d newestIndex=%10d "
-			"count=%32u length=%10u hasArrays=%2d file \"%[^\"]\" line=%10d function \"%[^\"]\" format=%[^\n]\n", 
+		int n2 = fscanf(ft, "TraceDefn offset=%10zu sz=%10zu last=%10zu oldestIndex=%10d newestIndex=%10d "
+			"count=%32zu length=%10zu hasArrays=%2d file \"%[^\"]\" line=%10d function \"%[^\"]\" format=%[^\n]\n", 
 			&bufferOffset, &bufferSize, &lastItemPos, &oldestPos, &newestPos,
 			&totalCount, &length, &hasArrays, &file[0], &line, &function[0], &format[0]);
 
-		if(n != 12) 
+		if(n2 != 12) 
 		{
-			printf("Scan error in TraceDefn, n=%d\n", n);
+			printf("Scan error in TraceDefn, n=%d\n", n2);
 			return false;
 		}
 
 		size_t specCount = 0;
 
-		n = fscanf(ft, "FormatParser SpecCount=%10u\n", &specCount);
+		int n3 = fscanf(ft, "FormatParser SpecCount=%10zu\n", &specCount);
 
-		if(n != 1) 
+		if(n3 != 1) 
 		{
-			printf("Scan error in FormatParser, n=%d\n", n);
+			printf("Scan error in FormatParser, n=%d\n", n3);
 			return false;
 		}
 
@@ -118,12 +118,12 @@ bool FilterTrace(FILE* ft, FILE* fb, FILE* fout)
 			int typeIndex = 0;
 			size_t typeSize = 0;
 
-			n = fscanf(ft, "FormatSpec pos=%10u string \"%[^\"]\" typeindex=%13x typeSize=%10u\n", 
+			int n4 = fscanf(ft, "FormatSpec pos=%10zu string \"%[^\"]\" typeindex=%13x typeSize=%10zu\n", 
 				&formatSpecPos, &formatSpecString[0], &typeIndex, &typeSize);
 
-			if(n != 4) 
+			if(n4 != 4) 
 			{
-				printf("Scan error in FormatSpec, n=%d\n", n);
+				printf("Scan error in FormatSpec, n=%d\n", n4);
 				return false;
 			}
 
@@ -136,18 +136,18 @@ bool FilterTrace(FILE* ft, FILE* fb, FILE* fout)
 	fclose(ft);
 
 	std::vector<Slot_t> buffer(dataSize);
-	n = fread(&buffer[0], sizeof(Slot_t), dataSize, fb);
-	if(n < (int)dataSize)
+	size_t n5 = fread(&buffer[0], sizeof(Slot_t), dataSize, fb);
+	if(n5 < dataSize)
 	{
 		if(ferror(fb)) 
 		{
-			printf("Error reading binary file, read %d\n", n);
+			printf("Error reading binary file, read %zu\n", n5);
 			return false;
 		}
 		else
 		{
-			printf("Binary file truncated\n");
-			dataSize = n;
+			printf("Binary file truncated, dataSize=%zu\n", n5);
+			dataSize = n5;
 		}
 	}
 	fclose(fb);
