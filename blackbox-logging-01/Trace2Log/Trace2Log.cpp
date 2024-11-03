@@ -5,6 +5,7 @@
 #include "./TraceItem.h"
 #include <string>
 #include <stdio.h>
+#include <algorithm>
 
 using Gbp::Tra::Tracer;
 using Gbp::Tra::TracerEx;
@@ -140,7 +141,7 @@ bool FilterTrace(FILE* ft, FILE* fb, FILE* fout)
 	{
 		if(ferror(fb)) 
 		{
-			printf("Error reading binary file\n", n);
+			printf("Error reading binary file, read %d\n", n);
 			return false;
 		}
 		else

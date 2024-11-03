@@ -2,7 +2,7 @@
 #define HEADER_Gbp_Tra_FmtSpec_h
 #pragma once
 #include <string>
-#include <boost/shared_ptr.hpp>
+#include <memory>
 namespace Gbp { namespace Tra {
 	class FmtSpec
 	{
@@ -24,7 +24,7 @@ namespace Gbp { namespace Tra {
 		size_t typeSize_;
 	};
 
-	typedef boost::shared_ptr<FmtSpec> FmtSpecPtr;
+	typedef std::shared_ptr<FmtSpec> FmtSpecPtr;
 }}
 
 #endif // HEADER_Gbp_Tra_FmtSpec_h

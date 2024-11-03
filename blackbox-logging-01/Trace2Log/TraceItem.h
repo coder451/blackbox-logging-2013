@@ -3,13 +3,13 @@
 #pragma once
 #include <Tracer/Trace.h>
 #include <string>
-#include <boost/shared_ptr.hpp>
+#include <memory>
 #include <functional>
 
 namespace Gbp { namespace Tra {
 
 	class TraceItem;
-	typedef boost::shared_ptr<TraceItem> TraceItemPtr;
+	typedef std::shared_ptr<TraceItem> TraceItemPtr;
 	typedef const TraceItemPtr& TraceItemPtrCRef;
 	
 	class TraceItem

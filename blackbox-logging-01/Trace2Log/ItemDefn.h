@@ -4,13 +4,13 @@
 #include <Tracer/TraceTypes.h>
 #include <string>
 #include <vector>
-#include <boost/shared_ptr.hpp>
+#include <memory>
 #include <stdio.h>
 namespace Gbp { namespace Tra {
 	class FmtSpec;
-	typedef boost::shared_ptr<FmtSpec> FmtSpecPtr;
+	typedef std::shared_ptr<FmtSpec> FmtSpecPtr;
 	class TraceItem;
-	typedef boost::shared_ptr<TraceItem> TraceItemPtr;
+	typedef std::shared_ptr<TraceItem> TraceItemPtr;
 	typedef std::vector<TraceItemPtr> TraceItems;
 
 	class ItemDefn
@@ -54,6 +54,6 @@ namespace Gbp { namespace Tra {
 		TraceItems traceItems_;
 	};
 
-	typedef boost::shared_ptr<ItemDefn> ItemDefnPtr;
+	typedef std::shared_ptr<ItemDefn> ItemDefnPtr;
 }}
 #endif // HEADER_Gbp_Tra_ItemDefn_h
