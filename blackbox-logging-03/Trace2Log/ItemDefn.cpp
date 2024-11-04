@@ -68,7 +68,10 @@ namespace Gbp { namespace Tra {
 			Sequence_t seq = buffer[pos];
 			pos = (pos < bufferSize_ - 1)? ++pos : 0;
 
-			TraceItemPtr spItem(new TraceItem(seq));
+			Sequence_t thrId = buffer[pos];
+			pos = (pos < bufferSize_ - 1)? ++pos : 0;
+
+			TraceItemPtr spItem(new TraceItem(seq, thrId));
 			traceItems_.push_back(spItem);
 
 			if(specCount_ == 0)

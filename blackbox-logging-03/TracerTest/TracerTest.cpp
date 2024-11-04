@@ -40,7 +40,7 @@ int main(int argc, char* argv[])
 //	TRACEF(10, "%d", MyClass());
 	std::string s1("abcdef");
 	std::string s2("uvxy");
- 	for(int i = 0; i < 10000; ++i)
+ 	for(int i = 0; i < 100; ++i)
  	{
  		TRACEF(10, "%s xxx %s %d", s1, s2, i);
  		TRACEF(10, "%d yyy %s %s", i, s1, s2);

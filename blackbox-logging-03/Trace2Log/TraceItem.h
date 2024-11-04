@@ -15,7 +15,7 @@ namespace Gbp { namespace Tra {
 	class TraceItem
 	{
 	public:
-		TraceItem(Sequence_t seq);
+		TraceItem(Sequence_t seq, Sequence_t thrId);
 		~TraceItem();
 		void addString(const std::string& s);
 		bool operator<(const TraceItem& a) const {return seq_ < a.seq_;}
@@ -24,6 +24,7 @@ namespace Gbp { namespace Tra {
 		bool save(FILE* f) const;
 	private:
 		Sequence_t seq_;
+		Sequence_t thrId_;
 		std::string value_;
 	};
 

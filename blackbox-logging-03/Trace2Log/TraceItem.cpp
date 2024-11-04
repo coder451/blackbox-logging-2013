@@ -1,9 +1,10 @@
 #include "./TraceItem.h"
 
 namespace Gbp { namespace Tra {
-	TraceItem::TraceItem(Sequence_t seq): 
+	TraceItem::TraceItem(Sequence_t seq, Sequence_t thrId): 
 		seq_(seq),
-		value_()
+		thrId_(thrId),
+		value_("")
 	{
 	}
 
@@ -18,7 +19,7 @@ namespace Gbp { namespace Tra {
 
 	bool TraceItem::save(FILE* f) const
 	{
-		int r = fprintf(f, "%I64u: %s\n", seq_, value_.c_str());
+		int r = fprintf(f, "%I64u\t0x%04x\t%s\n", seq_, (int)thrId_, value_.c_str());
 		return r > 0;
 	}
 

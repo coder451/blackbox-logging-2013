@@ -9,6 +9,7 @@
 #include "./SaveValue.h"
 #include "./SaveValueWrap.h"
 #include <stdio.h>
+#include <Windows.h>
 
 namespace Gbp { namespace Tra {
 	struct TraceSpec;
@@ -65,21 +66,6 @@ namespace Gbp { namespace Tra {
 		bool save(FILE* f);
 
 		//////////////////////////////////////////////////////////////////////////
-		bool wrappedInSequence(size_t& pos, Slot_t*& pWrite)
-		{
-			if(pos + SlotCount(sizeof(Sequence_t)) > size_)
-			{
-				// wrap
-				pWrite = pBuffer0_;
-				SaveValue(pWrite, SequenceNumber());
-				pos = SlotCount(sizeof(Sequence_t));
-				return true;
-			}
-			// Will not wrap here - just write it out.
-			SaveValue(pWrite, SequenceNumber());
-			pos += SlotCount(sizeof(Sequence_t));
-			return false;
-		}
 
 		bool wrappedInLength(size_t length,  size_t& pos, Slot_t*& pWrite)
 		{
@@ -160,7 +146,7 @@ namespace Gbp { namespace Tra {
 			pos_ += d;
 			if(hasArrays_)
 			{
-				while(newestIndex_ > oldestIndex_)
+				while(newestIndex_ >= oldestIndex_)
 				{
 					size_t pos = (size_t)(oldestIndex_ % size_);
 					oldestIndex_ += *(pBuffer0_ + pos);
@@ -174,21 +160,29 @@ namespace Gbp { namespace Tra {
 		//////////////////////////////////////////////////////////////////////////
 		void trace()
 		{
+			static const size_t MinLength = 2;
+
 			MutexMgr m(mutex_);
-			if(count_ == 0) checkFormatSpec(1, 0, 0, 0, 0);
+			if(count_ == 0) 
+			{
+				checkFormatSpec(MinLength, 0, 0, 0, 0);
+			}
 			++count_;
-			prevPos_ = pos_;
-			incrementPosition(1);
+			Slot_t* pWrite = pBuffer0_ + pos_;
+			size_t pos = pos_;
+			prevPos_ = pos;
+			incrementPosition(MinLength);
 
 			if(pos_ <= size_)
 			{
-				Slot_t* pWrite = pBuffer0_ + prevPos_;
 				SaveValue(pWrite, SequenceNumber());
+TRACEDEFN_T:	SaveValue(pWrite, GetCurrentThreadId());
 				return;
 			}
-			
-			pos_ = 1;
-			SaveValue(pBuffer0_, SequenceNumber());
+
+			pos_ -= size_;
+			if(wrappedInParam(SequenceNumber(), pos, pWrite)) goto TRACEDEFN_T;
+			wrappedInParam(GetCurrentThreadId(), pos, pWrite);
 		}
 
 
@@ -199,7 +193,7 @@ namespace Gbp { namespace Tra {
 			(void) sizeof(Gbp::Tra::AreTraceable<T0>);
 			static const int HasArrays = ParamType<T0>::hasVarLen;
 			static const size_t ParamCount = 1;
-			static const size_t MinLength = 1 + ParamCount;
+			static const size_t MinLength = 2 + ParamCount;
 			static const int ParamTypes[ParamCount] = {ParamType<T0>::value, };
 			static const size_t ParamSizes[ParamCount] = {sizeof(T0), };
 
@@ -225,13 +219,15 @@ namespace Gbp { namespace Tra {
 			{
 				if(HasArrays != 0) SaveValue(pWrite, length);
 TRACEDEFN_S:	SaveValue(pWrite, SequenceNumber());
+TRACEDEFN_T:	SaveValue(pWrite, GetCurrentThreadId());
 TRACEDEFN_0:	SaveValue(pWrite, t0);
 				return;
 			}
 
 			pos_ -= size_;
 			if(HasArrays != 0) if(wrappedInLength(length, pos, pWrite)) goto TRACEDEFN_S;
-			if(wrappedInSequence(pos, pWrite)) goto TRACEDEFN_0;
+			if(wrappedInParam(SequenceNumber(), pos, pWrite)) goto TRACEDEFN_T;
+			if(wrappedInParam(GetCurrentThreadId(), pos, pWrite)) goto TRACEDEFN_0;
 			wrappedInParam(t0, pos, pWrite);
 		}
 
@@ -242,7 +238,7 @@ TRACEDEFN_0:	SaveValue(pWrite, t0);
 			(void) sizeof(Gbp::Tra::AreTraceable<T0, T1>);
 			static const int HasArrays = ParamType<T0>::hasVarLen | ParamType<T1>::hasVarLen;
 			static const size_t ParamCount = 2;
-			static const size_t MinLength = 1 + ParamCount;
+			static const size_t MinLength = 2 + ParamCount;
 			static const int ParamTypes[ParamCount] = {ParamType<T0>::value, ParamType<T1>::value, };
 			static const int ParamSizes[ParamCount] = {sizeof(T0), sizeof(T1), };
 
@@ -266,6 +262,7 @@ TRACEDEFN_0:	SaveValue(pWrite, t0);
 			{
 				if(HasArrays != 0) SaveValue(pWrite, length);
 TRACEDEFN_S:	SaveValue(pWrite, SequenceNumber());
+TRACEDEFN_T:	SaveValue(pWrite, GetCurrentThreadId());
 TRACEDEFN_0:	SaveValue(pWrite, t0);
 TRACEDEFN_1:	SaveValue(pWrite, t1);
 				return;
@@ -273,7 +270,8 @@ TRACEDEFN_1:	SaveValue(pWrite, t1);
 
 			pos_ -= size_;
 			if(HasArrays != 0) if(wrappedInLength(length, pos, pWrite)) goto TRACEDEFN_S;
-			if(wrappedInSequence(pos, pWrite)) goto TRACEDEFN_0;
+			if(wrappedInParam(SequenceNumber(), pos, pWrite)) goto TRACEDEFN_T;
+			if(wrappedInParam(GetCurrentThreadId(), pos, pWrite)) goto TRACEDEFN_0;
 			if(wrappedInParam(t0, pos, pWrite)) goto TRACEDEFN_1;
 			wrappedInParam(t1, pos, pWrite);
 		}
@@ -285,7 +283,7 @@ TRACEDEFN_1:	SaveValue(pWrite, t1);
 			(void) sizeof(Gbp::Tra::AreTraceable<T0, T1, T2>);
 			static const int HasArrays = ParamType<T0>::hasVarLen | ParamType<T1>::hasVarLen | ParamType<T2>::hasVarLen;
 			static const size_t ParamCount = 3;
-			static const size_t MinLength = 1 + ParamCount;
+			static const size_t MinLength = 2 + ParamCount;
 			static const int ParamTypes[ParamCount] = {ParamType<T0>::value, ParamType<T1>::value, ParamType<T2>::value, };
 			static const size_t ParamSizes[ParamCount] = {sizeof(T0), sizeof(T1), sizeof(T2), };
 
@@ -310,6 +308,7 @@ TRACEDEFN_1:	SaveValue(pWrite, t1);
 			{
 				if(HasArrays != 0) SaveValue(pWrite, length);
 TRACEDEFN_S:	SaveValue(pWrite, SequenceNumber());
+TRACEDEFN_T:	SaveValue(pWrite, GetCurrentThreadId());
 TRACEDEFN_0:	SaveValue(pWrite, t0);
 TRACEDEFN_1:	SaveValue(pWrite, t1);
 TRACEDEFN_2:	SaveValue(pWrite, t2);
@@ -318,7 +317,8 @@ TRACEDEFN_2:	SaveValue(pWrite, t2);
 
 			pos_ -= size_;
 			if(HasArrays != 0) if(wrappedInLength(length, pos, pWrite)) goto TRACEDEFN_S;
-			if(wrappedInSequence(pos, pWrite)) goto TRACEDEFN_0;
+			if(wrappedInParam(SequenceNumber(), pos, pWrite)) goto TRACEDEFN_T;
+			if(wrappedInParam(GetCurrentThreadId(), pos, pWrite)) goto TRACEDEFN_0;
 			if(wrappedInParam(t0, pos, pWrite)) goto TRACEDEFN_1;
 			if(wrappedInParam(t1, pos, pWrite)) goto TRACEDEFN_2;
 			wrappedInParam(t2, pos, pWrite);
