@@ -1,20 +1,15 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual Studio 2008
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TracerTest", "TracerTest.vcproj", "{FCA32E5D-A591-4537-9569-CA29B6732189}"
-	ProjectSection(ProjectDependencies) = postProject
-		{11111326-21C3-47A9-AF29-6203FA71B283} = {11111326-21C3-47A9-AF29-6203FA71B283}
-		{ECD5F12E-045E-4D08-ADEC-D7D572B016B1} = {ECD5F12E-045E-4D08-ADEC-D7D572B016B1}
-	EndProjectSection
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.11.35327.3
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TracerTest", "TracerTest\TracerTest.vcxproj", "{FCA32E5D-A591-4537-9569-CA29B6732189}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Tracer", "..\Tracer\Tracer.vcproj", "{11111326-21C3-47A9-AF29-6203FA71B283}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Tracer", "Tracer\Tracer.vcxproj", "{11111326-21C3-47A9-AF29-6203FA71B283}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Trace2Log", "..\Trace2Log\Trace2Log.vcproj", "{CBF86B48-2B5C-4EFA-AF7B-4C8E778821F8}"
-	ProjectSection(ProjectDependencies) = postProject
-		{11111326-21C3-47A9-AF29-6203FA71B283} = {11111326-21C3-47A9-AF29-6203FA71B283}
-	EndProjectSection
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Trace2Log", "Trace2Log\Trace2Log.vcxproj", "{CBF86B48-2B5C-4EFA-AF7B-4C8E778821F8}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Mt", "..\Mt\Mt.vcproj", "{ECD5F12E-045E-4D08-ADEC-D7D572B016B1}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Mt", "Mt\Mt.vcxproj", "{ECD5F12E-045E-4D08-ADEC-D7D572B016B1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -49,11 +44,16 @@ Global
 		{ECD5F12E-045E-4D08-ADEC-D7D572B016B1}.Debug|Win32.ActiveCfg = Debug|Win32
 		{ECD5F12E-045E-4D08-ADEC-D7D572B016B1}.Debug|Win32.Build.0 = Debug|Win32
 		{ECD5F12E-045E-4D08-ADEC-D7D572B016B1}.Debug|x64.ActiveCfg = Debug|Win32
+		{ECD5F12E-045E-4D08-ADEC-D7D572B016B1}.Debug|x64.Build.0 = Debug|Win32
 		{ECD5F12E-045E-4D08-ADEC-D7D572B016B1}.Release|Win32.ActiveCfg = Release|Win32
 		{ECD5F12E-045E-4D08-ADEC-D7D572B016B1}.Release|Win32.Build.0 = Release|Win32
 		{ECD5F12E-045E-4D08-ADEC-D7D572B016B1}.Release|x64.ActiveCfg = Release|Win32
+		{ECD5F12E-045E-4D08-ADEC-D7D572B016B1}.Release|x64.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {BCF91FC7-990D-4CB6-BDFF-B74361DAC94D}
 	EndGlobalSection
 EndGlobal
