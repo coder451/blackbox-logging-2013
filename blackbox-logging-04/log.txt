@@ -1,0 +1,426 @@
+1	0x1870	main, using macro
+2	0x1870	main, 99=99
+3	0x1870	MyClass ctor
+4	0x1870	MyClass dtor
+5	0x1cfc	i=1
+6	0x1e14	i=1
+7	0x1cfc	i=2
+8	0x1e14	i=2
+9	0x1cfc	i=3
+10	0x1e14	i=3
+11	0x1cfc	i=4
+12	0x1e14	i=4
+13	0x1cfc	i=5
+14	0x1e14	i=5
+15	0x1cfc	i=6
+16	0x1e14	i=6
+17	0x1cfc	i=7
+18	0x1e14	i=7
+19	0x1cfc	i=8
+20	0x1e14	i=8
+21	0x1cfc	i=9
+22	0x1e14	i=9
+23	0x1870	abcdef xxx uvxy 0
+24	0x1870	0 yyy abcdef uvxy
+25	0x1870	abcdef xxx uvxy 1
+26	0x1870	1 yyy abcdef uvxy
+27	0x1870	abcdef xxx uvxy 2
+28	0x1870	2 yyy abcdef uvxy
+29	0x1870	abcdef xxx uvxy 3
+30	0x1870	3 yyy abcdef uvxy
+31	0x1870	abcdef xxx uvxy 4
+32	0x1870	4 yyy abcdef uvxy
+33	0x1870	abcdef xxx uvxy 5
+34	0x1870	5 yyy abcdef uvxy
+35	0x1870	abcdef xxx uvxy 6
+36	0x1870	6 yyy abcdef uvxy
+37	0x1870	abcdef xxx uvxy 7
+38	0x1870	7 yyy abcdef uvxy
+39	0x1870	abcdef xxx uvxy 8
+40	0x1870	8 yyy abcdef uvxy
+41	0x1870	abcdef xxx uvxy 9
+42	0x1870	9 yyy abcdef uvxy
+43	0x1870	abcdef xxx uvxy 10
+44	0x1870	10 yyy abcdef uvxy
+45	0x1870	abcdef xxx uvxy 11
+46	0x1870	11 yyy abcdef uvxy
+47	0x1870	abcdef xxx uvxy 12
+48	0x1870	12 yyy abcdef uvxy
+49	0x1870	abcdef xxx uvxy 13
+50	0x1870	13 yyy abcdef uvxy
+51	0x1870	abcdef xxx uvxy 14
+52	0x1870	14 yyy abcdef uvxy
+53	0x1870	abcdef xxx uvxy 15
+54	0x1870	15 yyy abcdef uvxy
+55	0x1870	abcdef xxx uvxy 16
+56	0x1870	16 yyy abcdef uvxy
+57	0x1870	abcdef xxx uvxy 17
+58	0x1870	17 yyy abcdef uvxy
+59	0x1870	abcdef xxx uvxy 18
+60	0x1870	18 yyy abcdef uvxy
+61	0x1870	abcdef xxx uvxy 19
+62	0x1870	19 yyy abcdef uvxy
+63	0x1870	abcdef xxx uvxy 20
+64	0x1870	20 yyy abcdef uvxy
+65	0x1870	abcdef xxx uvxy 21
+66	0x1870	21 yyy abcdef uvxy
+67	0x1870	abcdef xxx uvxy 22
+68	0x1870	22 yyy abcdef uvxy
+69	0x1870	abcdef xxx uvxy 23
+70	0x1870	23 yyy abcdef uvxy
+71	0x1870	abcdef xxx uvxy 24
+72	0x1870	24 yyy abcdef uvxy
+73	0x1870	abcdef xxx uvxy 25
+74	0x1870	25 yyy abcdef uvxy
+75	0x1870	abcdef xxx uvxy 26
+76	0x1870	26 yyy abcdef uvxy
+77	0x1870	abcdef xxx uvxy 27
+78	0x1870	27 yyy abcdef uvxy
+79	0x1870	abcdef xxx uvxy 28
+80	0x1870	28 yyy abcdef uvxy
+81	0x1870	abcdef xxx uvxy 29
+82	0x1870	29 yyy abcdef uvxy
+83	0x1870	abcdef xxx uvxy 30
+84	0x1870	30 yyy abcdef uvxy
+85	0x1870	abcdef xxx uvxy 31
+86	0x1870	31 yyy abcdef uvxy
+87	0x1870	abcdef xxx uvxy 32
+88	0x1870	32 yyy abcdef uvxy
+89	0x1870	abcdef xxx uvxy 33
+90	0x1870	33 yyy abcdef uvxy
+91	0x1870	abcdef xxx uvxy 34
+92	0x1870	34 yyy abcdef uvxy
+93	0x1870	abcdef xxx uvxy 35
+94	0x1870	35 yyy abcdef uvxy
+95	0x1870	abcdef xxx uvxy 36
+96	0x1870	36 yyy abcdef uvxy
+97	0x1870	abcdef xxx uvxy 37
+98	0x1870	37 yyy abcdef uvxy
+99	0x1870	abcdef xxx uvxy 38
+100	0x1870	38 yyy abcdef uvxy
+101	0x1870	abcdef xxx uvxy 39
+102	0x1870	39 yyy abcdef uvxy
+103	0x1870	abcdef xxx uvxy 40
+104	0x1870	40 yyy abcdef uvxy
+105	0x1870	abcdef xxx uvxy 41
+106	0x1870	41 yyy abcdef uvxy
+107	0x1870	abcdef xxx uvxy 42
+108	0x1870	42 yyy abcdef uvxy
+109	0x1870	abcdef xxx uvxy 43
+110	0x1870	43 yyy abcdef uvxy
+111	0x1870	abcdef xxx uvxy 44
+112	0x1870	44 yyy abcdef uvxy
+113	0x1870	abcdef xxx uvxy 45
+114	0x1870	45 yyy abcdef uvxy
+115	0x1870	abcdef xxx uvxy 46
+116	0x1870	46 yyy abcdef uvxy
+117	0x1870	abcdef xxx uvxy 47
+118	0x1870	47 yyy abcdef uvxy
+119	0x1870	abcdef xxx uvxy 48
+120	0x1870	48 yyy abcdef uvxy
+121	0x1870	abcdef xxx uvxy 49
+122	0x1870	49 yyy abcdef uvxy
+123	0x1870	abcdef xxx uvxy 50
+124	0x1870	50 yyy abcdef uvxy
+125	0x1870	abcdef xxx uvxy 51
+126	0x1870	51 yyy abcdef uvxy
+127	0x1870	abcdef xxx uvxy 52
+128	0x1870	52 yyy abcdef uvxy
+129	0x1cfc	i=10
+130	0x1870	abcdef xxx uvxy 53
+131	0x1870	53 yyy abcdef uvxy
+132	0x1870	abcdef xxx uvxy 54
+133	0x1870	54 yyy abcdef uvxy
+134	0x1870	abcdef xxx uvxy 55
+135	0x1870	55 yyy abcdef uvxy
+136	0x1870	abcdef xxx uvxy 56
+137	0x1870	56 yyy abcdef uvxy
+138	0x1870	abcdef xxx uvxy 57
+139	0x1870	57 yyy abcdef uvxy
+140	0x1870	abcdef xxx uvxy 58
+141	0x1870	58 yyy abcdef uvxy
+142	0x1870	abcdef xxx uvxy 59
+143	0x1870	59 yyy abcdef uvxy
+144	0x1870	abcdef xxx uvxy 60
+145	0x1870	60 yyy abcdef uvxy
+146	0x1870	abcdef xxx uvxy 61
+147	0x1870	61 yyy abcdef uvxy
+148	0x1870	abcdef xxx uvxy 62
+149	0x1870	62 yyy abcdef uvxy
+150	0x1870	abcdef xxx uvxy 63
+151	0x1870	63 yyy abcdef uvxy
+152	0x1870	abcdef xxx uvxy 64
+153	0x1870	64 yyy abcdef uvxy
+154	0x1870	abcdef xxx uvxy 65
+155	0x1870	65 yyy abcdef uvxy
+156	0x1870	abcdef xxx uvxy 66
+157	0x1870	66 yyy abcdef uvxy
+158	0x1870	abcdef xxx uvxy 67
+159	0x1870	67 yyy abcdef uvxy
+160	0x1870	abcdef xxx uvxy 68
+161	0x1870	68 yyy abcdef uvxy
+162	0x1870	abcdef xxx uvxy 69
+163	0x1870	69 yyy abcdef uvxy
+164	0x1870	abcdef xxx uvxy 70
+165	0x1870	70 yyy abcdef uvxy
+166	0x1870	abcdef xxx uvxy 71
+167	0x1870	71 yyy abcdef uvxy
+168	0x1870	abcdef xxx uvxy 72
+169	0x1870	72 yyy abcdef uvxy
+170	0x1870	abcdef xxx uvxy 73
+171	0x1870	73 yyy abcdef uvxy
+172	0x1870	abcdef xxx uvxy 74
+173	0x1870	74 yyy abcdef uvxy
+174	0x1870	abcdef xxx uvxy 75
+175	0x1870	75 yyy abcdef uvxy
+176	0x1870	abcdef xxx uvxy 76
+177	0x1870	76 yyy abcdef uvxy
+178	0x1870	abcdef xxx uvxy 77
+179	0x1870	77 yyy abcdef uvxy
+180	0x1870	abcdef xxx uvxy 78
+181	0x1870	78 yyy abcdef uvxy
+182	0x1870	abcdef xxx uvxy 79
+183	0x1870	79 yyy abcdef uvxy
+184	0x1870	abcdef xxx uvxy 80
+185	0x1870	80 yyy abcdef uvxy
+186	0x1870	abcdef xxx uvxy 81
+187	0x1870	81 yyy abcdef uvxy
+188	0x1870	abcdef xxx uvxy 82
+189	0x1870	82 yyy abcdef uvxy
+190	0x1870	abcdef xxx uvxy 83
+191	0x1870	83 yyy abcdef uvxy
+192	0x1870	abcdef xxx uvxy 84
+193	0x1870	84 yyy abcdef uvxy
+194	0x1870	abcdef xxx uvxy 85
+195	0x1870	85 yyy abcdef uvxy
+196	0x1870	abcdef xxx uvxy 86
+197	0x1870	86 yyy abcdef uvxy
+198	0x1870	abcdef xxx uvxy 87
+199	0x1870	87 yyy abcdef uvxy
+200	0x1870	abcdef xxx uvxy 88
+201	0x1870	88 yyy abcdef uvxy
+202	0x1870	abcdef xxx uvxy 89
+203	0x1870	89 yyy abcdef uvxy
+204	0x1870	abcdef xxx uvxy 90
+205	0x1870	90 yyy abcdef uvxy
+206	0x1870	abcdef xxx uvxy 91
+207	0x1870	91 yyy abcdef uvxy
+208	0x1870	abcdef xxx uvxy 92
+209	0x1870	92 yyy abcdef uvxy
+210	0x1870	abcdef xxx uvxy 93
+211	0x1870	93 yyy abcdef uvxy
+212	0x1870	abcdef xxx uvxy 94
+213	0x1870	94 yyy abcdef uvxy
+214	0x1870	abcdef xxx uvxy 95
+215	0x1870	95 yyy abcdef uvxy
+216	0x1870	abcdef xxx uvxy 96
+217	0x1870	96 yyy abcdef uvxy
+218	0x1870	abcdef xxx uvxy 97
+219	0x1870	97 yyy abcdef uvxy
+220	0x1870	abcdef xxx uvxy 98
+221	0x1870	98 yyy abcdef uvxy
+222	0x1870	abcdef xxx uvxy 99
+223	0x1870	99 yyy abcdef uvxy
+224	0x1870	XYZ
+225	0x1870	XYZ
+226	0x1870	A double: 3.141593
+227	0x1e14	i=10
+228	0x1cfc	i=11
+229	0x1e14	i=11
+230	0x1cfc	i=12
+231	0x1e14	i=12
+232	0x1cfc	i=13
+233	0x1e14	i=13
+234	0x1cfc	i=14
+235	0x1e14	i=14
+236	0x1cfc	i=15
+237	0x1e14	i=15
+238	0x1cfc	i=16
+239	0x1e14	i=16
+240	0x1cfc	i=17
+241	0x1e14	i=17
+242	0x1cfc	i=18
+243	0x1e14	i=18
+244	0x1cfc	i=19
+245	0x1e14	i=19
+246	0x1cfc	i=20
+247	0x1e14	i=20
+248	0x1cfc	i=21
+249	0x1e14	i=21
+250	0x1cfc	i=22
+251	0x1e14	i=22
+252	0x1cfc	i=23
+253	0x1e14	i=23
+254	0x1cfc	i=24
+255	0x1e14	i=24
+256	0x1cfc	i=25
+257	0x1e14	i=25
+258	0x1cfc	i=26
+259	0x1e14	i=26
+260	0x1cfc	i=27
+261	0x1e14	i=27
+262	0x1cfc	i=28
+263	0x1e14	i=28
+264	0x1cfc	i=29
+265	0x1e14	i=29
+266	0x1cfc	i=30
+267	0x1e14	i=30
+268	0x1cfc	i=31
+269	0x1e14	i=31
+270	0x1cfc	i=32
+271	0x1e14	i=32
+272	0x1cfc	i=33
+273	0x1e14	i=33
+274	0x1cfc	i=34
+275	0x1e14	i=34
+276	0x1cfc	i=35
+277	0x1e14	i=35
+278	0x1cfc	i=36
+279	0x1e14	i=36
+280	0x1cfc	i=37
+281	0x1e14	i=37
+282	0x1cfc	i=38
+283	0x1e14	i=38
+284	0x1cfc	i=39
+285	0x1e14	i=39
+286	0x1cfc	i=40
+287	0x1e14	i=40
+288	0x1cfc	i=41
+289	0x1e14	i=41
+290	0x1cfc	i=42
+291	0x1e14	i=42
+292	0x1cfc	i=43
+293	0x1e14	i=43
+294	0x1cfc	i=44
+295	0x1e14	i=44
+296	0x1cfc	i=45
+297	0x1e14	i=45
+298	0x1cfc	i=46
+299	0x1e14	i=46
+300	0x1cfc	i=47
+301	0x1e14	i=47
+302	0x1cfc	i=48
+303	0x1e14	i=48
+304	0x1cfc	i=49
+305	0x1e14	i=49
+306	0x1cfc	i=50
+307	0x1e14	i=50
+308	0x1cfc	i=51
+309	0x1e14	i=51
+310	0x1cfc	i=52
+311	0x1e14	i=52
+312	0x1cfc	i=53
+313	0x1e14	i=53
+314	0x1cfc	i=54
+315	0x1e14	i=54
+316	0x1cfc	i=55
+317	0x1e14	i=55
+318	0x1cfc	i=56
+319	0x1e14	i=56
+320	0x1cfc	i=57
+321	0x1e14	i=57
+322	0x1cfc	i=58
+323	0x1e14	i=58
+324	0x1cfc	i=59
+325	0x1e14	i=59
+326	0x1cfc	i=60
+327	0x1e14	i=60
+328	0x1cfc	i=61
+329	0x1e14	i=61
+330	0x1cfc	i=62
+331	0x1e14	i=62
+332	0x1cfc	i=63
+333	0x1e14	i=63
+334	0x1cfc	i=64
+335	0x1e14	i=64
+336	0x1cfc	i=65
+337	0x1e14	i=65
+338	0x1cfc	i=66
+339	0x1e14	i=66
+340	0x1cfc	i=67
+341	0x1e14	i=67
+342	0x1cfc	i=68
+343	0x1e14	i=68
+344	0x1cfc	i=69
+345	0x1e14	i=69
+346	0x1cfc	i=70
+347	0x1e14	i=70
+348	0x1cfc	i=71
+349	0x1e14	i=71
+350	0x1cfc	i=72
+351	0x1e14	i=72
+352	0x1cfc	i=73
+353	0x1e14	i=73
+354	0x1cfc	i=74
+355	0x1e14	i=74
+356	0x1cfc	i=75
+357	0x1e14	i=75
+358	0x1cfc	i=76
+359	0x1e14	i=76
+360	0x1cfc	i=77
+361	0x1e14	i=77
+362	0x1cfc	i=78
+363	0x1e14	i=78
+364	0x1cfc	i=79
+365	0x1e14	i=79
+366	0x1cfc	i=80
+367	0x1e14	i=80
+368	0x1cfc	i=81
+369	0x1e14	i=81
+370	0x1cfc	i=82
+371	0x1e14	i=82
+372	0x1cfc	i=83
+373	0x1e14	i=83
+374	0x1cfc	i=84
+375	0x1e14	i=84
+376	0x1cfc	i=85
+377	0x1e14	i=85
+378	0x1cfc	i=86
+379	0x1e14	i=86
+380	0x1cfc	i=87
+381	0x1e14	i=87
+382	0x1cfc	i=88
+383	0x1e14	i=88
+384	0x1cfc	i=89
+385	0x1e14	i=89
+386	0x1cfc	i=90
+387	0x1e14	i=90
+388	0x1cfc	i=91
+389	0x1e14	i=91
+390	0x1cfc	i=92
+391	0x1e14	i=92
+392	0x1cfc	i=93
+393	0x1e14	i=93
+394	0x1cfc	i=94
+395	0x1e14	i=94
+396	0x1cfc	i=95
+397	0x1e14	i=95
+398	0x1cfc	i=96
+399	0x1e14	i=96
+400	0x1cfc	i=97
+401	0x1e14	i=97
+402	0x1cfc	i=98
+403	0x1e14	i=98
+404	0x1cfc	i=99
+405	0x1e14	i=99
+406	0x1cfc	i=100
+407	0x1e14	i=100
+408	0x1cfc	i=101
+409	0x1e14	i=101
+410	0x1cfc	i=102
+411	0x1e14	i=102
+412	0x1cfc	i=103
+413	0x1e14	i=103
+414	0x1cfc	i=104
+415	0x1e14	i=104
+416	0x1cfc	i=105
+417	0x1e14	i=105
+418	0x1cfc	i=106
+419	0x1e14	i=106
+420	0x1cfc	i=107
+421	0x1e14	i=107
+422	0x1cfc	i=108
+423	0x1e14	i=108
+424	0x1cfc	i=109
+425	0x1e14	i=109
+426	0x1cfc	i=110
