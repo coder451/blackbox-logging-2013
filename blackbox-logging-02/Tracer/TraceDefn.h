@@ -168,7 +168,7 @@ namespace Gbp { namespace Tra {
 				return;
 			}
 
-			if(newestIndex_ > oldestIndex_) oldestIndex_ += minLength_;
+			if(newestIndex_ == oldestIndex_) oldestIndex_ += minLength_;
 		}
 
 		//////////////////////////////////////////////////////////////////////////
@@ -211,7 +211,10 @@ namespace Gbp { namespace Tra {
 			}
 
 			MutexMgr m(mutex_);	
-			if(count_ == 0) checkFormatSpec(length, HasArrays, ParamCount, &ParamTypes[0], &ParamSizes[0]);
+			if(count_ == 0) 
+			{
+				checkFormatSpec(length, HasArrays, ParamCount, &ParamTypes[0], &ParamSizes[0]);
+			}
 			++count_;
 			Slot_t* pWrite = pBuffer0_ + pos_;
 			size_t pos = pos_;

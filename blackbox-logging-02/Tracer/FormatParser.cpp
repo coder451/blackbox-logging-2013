@@ -352,7 +352,10 @@ namespace Gbp { namespace Tra {
 
 	bool FormatParser::checkFormatSpec(int i, int typeIndex, size_t size)
 	{
-		if(i >= (int)formatSpecs_.size()) return false;
+		if(i >= (int)formatSpecs_.size()) 
+		{
+			return false;
+		}
 		FormatSpec& fs = formatSpecs_[i];
 		fs.typeIndex(typeIndex);
 		fs.size(size);

@@ -1,12 +1,14 @@
 #include "./MyClass.h"
 #include "./MyTemplate.h"
+#include "./MyAction.h"
 #include <Tracer/Trace.h>
+#include <Mt/Threads.h>
 #include <stdio.h>
 using Gbp::Tra::Tracer;
 
 int main(int argc, char* argv[])
 {
-	Tracer::InitInstance(10000);
+	Tracer::InitInstance(100000);
 
 	// This can be set up by the compiler at compile time.
 	// No assignment happens at runtime.
@@ -22,24 +24,32 @@ int main(int argc, char* argv[])
 	// Use a macro to hide the details
 	TRACEF(10, "main, using macro");
 	int i = 99;
-	//TRACEF(10, "main: i=%d", i);
+	TRACEF(10, "main, 99=%d", i);
 
-	MyClass* m = new MyClass();
-	delete m;
+	// Some threads
+	MyAction myAction;
+	Gbp::Mt::Threads<MyAction> threads(2, &myAction);
+	threads.create();
+	threads.start();
 
-	//TRACEF(10, "%d", MyClass());
+
+ 	MyClass* m = new MyClass();
+ 	delete m;
+	Sleep(1000);
+
+//	TRACEF(10, "%d", MyClass());
 	std::string s1("abcdef");
 	std::string s2("uvxy");
-	for(int i = 0; i < 10000; ++i)
-	{
-		TRACEF(10, "%s xxx %s %d", s1, s2, i);
-		TRACEF(10, "%d yyy %s %s", i, s1, s2);
-	}
+ 	for(int i = 0; i < 10000; ++i)
+ 	{
+ 		TRACEF(10, "%s xxx %s %d", s1, s2, i);
+ 		TRACEF(10, "%d yyy %s %s", i, s1, s2);
+ 	}
 
-	MyTemplate<int> mt1;
-	MyTemplate<size_t> mt2;
+ 	MyTemplate<int> mt1;
+ 	MyTemplate<size_t> mt2;
 
-	TRACEF(1, "A double: %f", 3.1415926535);
+ 	TRACEF(1, "A double: %f", 3.1415926535);
 
 	std::string fname(argv[1]);
 	std::string ftname = fname + ".ttra";
@@ -64,9 +74,12 @@ int main(int argc, char* argv[])
 		return 1;
 	}
 
+	::Sleep(10000);
 	Tracer::Save(ft, fb);
 	::fclose(ft);
 	::fclose(fb);
+	myAction.finish();
+	threads.wait();
 
 	return 0;
 }

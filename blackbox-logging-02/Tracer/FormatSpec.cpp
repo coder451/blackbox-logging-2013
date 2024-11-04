@@ -6,7 +6,10 @@ namespace Gbp { namespace Tra {
 	saveType_(SAVETYPE_NONE),
 	pFmt_(0),
 	lenFmt_(0),
-	fmtChg_(FC_NONE)
+	fmtChg_(FC_NONE),
+	typeIndex_(0),
+	size_(0),
+	pFmt0_(0)
 	{
 	}
 
