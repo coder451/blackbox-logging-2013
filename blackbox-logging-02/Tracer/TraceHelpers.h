@@ -17,8 +17,8 @@ namespace Gbp { namespace Tra {
 	// Applies to every type that does not represent a variable length.
 	// Not used at runtime.
 	template <typename T> inline 
-		typename boost::disable_if_c<
-		Gbp::Tra::ParamType<T>::hasVarLen != 0, 
+		typename std::enable_if<
+		Gbp::Tra::ParamType<T>::hasVarLen == 0, 
 		size_t>::type 
 		LengthOf(const T& t)
 	{
@@ -26,7 +26,7 @@ namespace Gbp { namespace Tra {
 	}
 
 	template <typename T> inline 
-		typename boost::enable_if_c<
+		typename std::enable_if<
 		Gbp::Tra::ParamType<T>::isStdString != 0, 
 		size_t>::type 
 		LengthOf(const T& t)
@@ -35,7 +35,7 @@ namespace Gbp { namespace Tra {
 	}
 
 	template <typename T> inline 
-		typename boost::enable_if_c<
+		typename std::enable_if<
 		Gbp::Tra::ParamType<T>::isStdWstring != 0, 
 		size_t>::type 
 		LengthOf(const T& t)
@@ -44,16 +44,16 @@ namespace Gbp { namespace Tra {
 	}
 
 	template <typename T> inline 
-		typename boost::enable_if_c<
+		typename std::enable_if<
 		Gbp::Tra::ParamType<T>::isStdVector != 0, 
 		size_t>::type 
 		LengthOf(const T& t)
 	{
-		return SlotCount(t.size() * sizeof(t::value_type));
+		return SlotCount(t.size()) * sizeof(T::value_type);
 	}
 
 	template <typename T> inline 
-		typename boost::enable_if_c<
+		typename std::enable_if<
 		Gbp::Tra::ParamType<T>::isSzStringWrapper != 0, 
 		size_t>::type 
 		LengthOf(const T& t)
@@ -62,7 +62,7 @@ namespace Gbp { namespace Tra {
 	}
 
 	template <typename T> inline 
-		typename boost::enable_if_c<
+		typename std::enable_if<
 		Gbp::Tra::ParamType<T>::isSzWStringWrapper != 0, 
 		size_t>::type 
 		LengthOf(const T& t)

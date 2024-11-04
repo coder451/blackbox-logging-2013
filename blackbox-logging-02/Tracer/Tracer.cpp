@@ -44,7 +44,7 @@ namespace Gbp { namespace Tra {
 			if(m < 1024) m = 1024;
 			
 			// power of two buffers to help with alignment
-			size_t n = 1;
+			int n = 1;
 			while(n < m) n *= 2;
 
 			N += n;
@@ -76,7 +76,7 @@ namespace Gbp { namespace Tra {
 
 	bool Tracer::save(FILE* ft, FILE* fb)
 	{
-		fprintf(ft, "Tracer BufferSize=%u DefnCount=%u\n", size_ / sizeof(Slot_t), traceSpecVector_.size());
+		fprintf(ft, "Tracer BufferSize=%zu DefnCount=%zu\n", size_ / sizeof(Slot_t), traceSpecVector_.size());
 		for(TraceSpecVector::iterator i = traceSpecVector_.begin(); i != traceSpecVector_.end(); ++i)
 		{
 			bool r = (*i)->pTraceDefn->save(ft);
@@ -85,7 +85,7 @@ namespace Gbp { namespace Tra {
 				return false;
 			}
 		}
-		int r = fwrite(&buffer_[0], 1, buffer_.size(), fb);
+		size_t r = fwrite(&buffer_[0], 1, buffer_.size(), fb);
 		if(r != buffer_.size())
 		{
 			return false;
