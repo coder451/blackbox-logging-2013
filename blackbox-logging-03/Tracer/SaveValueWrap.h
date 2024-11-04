@@ -10,7 +10,7 @@ namespace Gbp { namespace Tra {
 	// std::string
 	template <typename T>
 	inline 
-		typename boost::enable_if_c<
+		typename std::enable_if<
 		Gbp::Tra::IsStdStringType<T>::value, 
 		void>::type
 		SaveValueBegin(Slot_t*& p, const T& t, size_t n)
@@ -23,7 +23,7 @@ namespace Gbp { namespace Tra {
 
 	template <typename T>
 	inline 
-		typename boost::enable_if_c<
+		typename std::enable_if<
 		Gbp::Tra::IsStdStringType<T>::value, 
 		void>::type
 		SaveValueEnd(Slot_t*& p, const T& t, size_t n)
@@ -43,8 +43,8 @@ namespace Gbp { namespace Tra {
 	// For everything else
 	template <typename T>
 	inline
-		typename boost::disable_if_c<
-			Gbp::Tra::IsStdStringType<T>::value, 
+		typename std::enable_if<
+			Gbp::Tra::IsStdStringType<T>::value == 0, 
 			void>::type
 		SaveValueBegin(Slot_t*& p, const T& t, size_t)
 	{
@@ -52,8 +52,8 @@ namespace Gbp { namespace Tra {
 
 	template <typename T>
 	inline
-		typename boost::disable_if_c<
-		Gbp::Tra::IsStdStringType<T>::value, 
+		typename std::enable_if<
+		Gbp::Tra::IsStdStringType<T>::value == 0, 
 		void>::type
 		SaveValueEnd(Slot_t*& p, const T& t, size_t)
 	{
@@ -63,7 +63,7 @@ namespace Gbp { namespace Tra {
 
 	template <typename T>
 	inline
-		typename boost::enable_if_c<
+		typename std::enable_if<
 		Gbp::Tra::IsStdStringType<T>::value, 
 		size_t>::type
 		ValueSize(const T& t)
@@ -73,8 +73,8 @@ namespace Gbp { namespace Tra {
 
 	template <typename T>
 	inline
-		typename boost::disable_if_c<
-		Gbp::Tra::IsStdStringType<T>::value, 
+		typename std::enable_if<
+		Gbp::Tra::IsStdStringType<T>::value == 0, 
 		size_t>::type
 		ValueSize(const T& t)
 	{
