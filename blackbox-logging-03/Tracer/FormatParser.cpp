@@ -350,9 +350,9 @@ namespace Gbp { namespace Tra {
 		return formatSpecs_.size();
 	}
 
-	bool FormatParser::checkFormatSpec(int i, int typeIndex, size_t size)
+	bool FormatParser::checkFormatSpec(size_t i, int typeIndex, size_t size)
 	{
-		if(i >= (int)formatSpecs_.size()) 
+		if(i >= formatSpecs_.size()) 
 		{
 			return false;
 		}
@@ -364,7 +364,7 @@ namespace Gbp { namespace Tra {
 
 	bool FormatParser::save(FILE* f)
 	{
-		int r = fprintf(f, "FormatParser SpecCount=%u\n", formatSpecs_.size());
+		int r = fprintf(f, "FormatParser SpecCount=%zu\n", formatSpecs_.size());
 		if(r < 0) return false;
 		for(FormatSpecs::iterator i = formatSpecs_.begin(); i != formatSpecs_.end(); ++i)
 		{

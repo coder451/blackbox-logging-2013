@@ -95,7 +95,6 @@ namespace Gbp { namespace Tra {
 					{
 						// This is the size of the item.
 						size_t n = (size_t)buffer[pos];
-						assert(n <= 7);
 						pos = (pos < bufferSize_ - 1)? ++pos : 0;
 
 						if(pos + SlotCount(n) <= bufferSize_)

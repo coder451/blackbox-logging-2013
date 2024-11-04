@@ -12,7 +12,9 @@ namespace Gbp { namespace Tra {
 	class MutexImpl
 	{
 	public:
-		MutexImpl(){::InitializeCriticalSection(&cs_);}
+		MutexImpl() {
+			::InitializeCriticalSection(&cs_);
+		}
 		~MutexImpl(){::DeleteCriticalSection(&cs_);}
 		void lock(){::EnterCriticalSection(&cs_);}
 		void unlock(){::LeaveCriticalSection(&cs_);}

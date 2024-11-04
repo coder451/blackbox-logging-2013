@@ -49,7 +49,7 @@ namespace Gbp { namespace Tra {
 #pragma warning(push)
 #pragma warning(disable: 4996)
 		// Format is at the end as it may contain any characters.
-		r = fprintf(f, "TraceDefn offset=%u sz=%u last=%u oldestIndex=%d newestIndex=%d count=%I64u length=%u hasArrays=%d file \"%s\" line=%d function \"%s\" format=%s\n",
+		r = fprintf(f, "TraceDefn offset=%zu sz=%zu last=%zu oldestIndex=%zu newestIndex=%zu count=%zu length=%zu hasArrays=%d file \"%s\" line=%d function \"%s\" format=%s\n",
 			offset_, size_, prevPos_, (int)oldestIndex_ % size_, (int)(newestIndex_ + size_) % size_,
 			count_, minLength_, (hasArrays_? 1 : 0),
 			pTraceSpec_->file, pTraceSpec_->line, pTraceSpec_->function,

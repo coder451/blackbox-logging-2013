@@ -68,8 +68,8 @@ namespace Gbp { namespace Tra {
 	inline
 		typename std::enable_if<
 			!(std::is_arithmetic<T>::value || 
-			Gbp::Tra::IsPtrWrapper<T>::value ||
-			Gbp::Tra::IsStdStringType<T>::value), 
+			  Gbp::Tra::IsPtrWrapper<T>::value ||
+			  Gbp::Tra::IsStdStringType<T>::value), 
 			void>::type
 		SaveValue(Slot_t*& p, const T& t)
 	{

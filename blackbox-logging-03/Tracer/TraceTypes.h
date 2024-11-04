@@ -4,6 +4,7 @@
 #include "./TraceWrappers.h"
 #include <type_traits>
 #include <vector>
+#include <string>
 
 namespace Gbp { namespace Tra {
 

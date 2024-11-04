@@ -42,7 +42,7 @@ namespace Gbp { namespace Tra {
 	{
 		std::string s;
 		s.append(pFmt_, lenFmt_);
-		int r = fprintf(f, "FormatSpec pos=%d string \"%s\" typeindex=0x%x typeSize=%u\n", pFmt_ - pFmt0_, s.c_str(), typeIndex_, size_);
+		int r = fprintf(f, "FormatSpec pos=%zu string \"%s\" typeindex=0x%x typeSize=%zu\n", pFmt_ - pFmt0_, s.c_str(), typeIndex_, size_);
 		if(r < 0) return false;
 		return true;
 	}
