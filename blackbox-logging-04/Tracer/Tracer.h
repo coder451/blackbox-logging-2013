@@ -7,6 +7,7 @@
 #include <Mt/Threads.h>
 #include <vector>
 #include <stdio.h>
+#include <string>
 
 // The main tracing object
 

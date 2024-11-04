@@ -1,4 +1,5 @@
 #include "./Semaphore.h"
+
 namespace Gbp { namespace Mt {
 
 	Semaphore::Semaphore(): h_(0)

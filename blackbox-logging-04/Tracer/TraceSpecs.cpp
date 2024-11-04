@@ -19,14 +19,14 @@ namespace Gbp { namespace Tra {
 		HMODULE h = GetModuleHandle(0);
 
 		// Check the DOS header
-		PIMAGE_DOS_HEADER pDosHeader = pDosHeader = (PIMAGE_DOS_HEADER)h;
+		PIMAGE_DOS_HEADER pDosHeader = (PIMAGE_DOS_HEADER)h;
 		if(pDosHeader->e_magic != IMAGE_DOS_SIGNATURE)
 		{
 			return;
 		}
 
-		PIMAGE_NT_HEADERS32 pHeader = (PIMAGE_NT_HEADERS32)((char *)h + pDosHeader->e_lfanew);
-		int sectionCount = pHeader->FileHeader.NumberOfSections;
+		PIMAGE_NT_HEADERS64 pNTHeader = (PIMAGE_NT_HEADERS64)((char *)pDosHeader + pDosHeader->e_lfanew);
+		int sectionCount = pNTHeader->FileHeader.NumberOfSections;
 
 		// In the PE file, the raw data that comprises each section is guaranteed 
 		// to start at a multiple of this value. The default value is 0x200 bytes, 
@@ -38,7 +38,9 @@ namespace Gbp { namespace Tra {
 		// virtual address that's a multiple of this value. We don't actually use it. 
 		// size_t sectionAlignment = pHeader->OptionalHeader.SectionAlignment;
 
-		PIMAGE_SECTION_HEADER pSection = (PIMAGE_SECTION_HEADER)(pHeader + 1);
+		PIMAGE_OPTIONAL_HEADER64 pImageOptionalHeader = &(pNTHeader->OptionalHeader);
+
+		PIMAGE_SECTION_HEADER pSection = (PIMAGE_SECTION_HEADER)(pNTHeader + 1);
 
 		// Look for the named section in the PE. // , '-', 's', 'e', 'c', 't', 'i', 'o', 'n'
 		BYTE name[] = {'.', 't', 'r', 'a', 'c', 'e'};

@@ -30,7 +30,7 @@ namespace Gbp { namespace Tra {
 		FmtChg fmtChg_;
 
 		int typeIndex_;
-		int size_;
+		size_t size_;
 		const char* pFmt0_;
 	public:
 		FormatSpec();
@@ -56,7 +56,7 @@ namespace Gbp { namespace Tra {
 		void fixType(std::string& fmt);
 
 		void typeIndex(int v){typeIndex_ = v;}
-		void size(int v){size_ = v;}
+		void size(size_t v){size_ = v;}
 		ptrdiff_t offset() const {return pFmt_ - pFmt0_;}
 		bool save(FILE* f);
 	};

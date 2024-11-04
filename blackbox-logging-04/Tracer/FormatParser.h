@@ -14,7 +14,7 @@ namespace Gbp { namespace Tra {
 		~FormatParser();
 		int parse(const char* p);
 		size_t size();
-		bool checkFormatSpec(int i, int typeIndex, size_t size);
+		bool checkFormatSpec(size_t i, int typeIndex, size_t size);
 		bool save(FILE* f);
 	private:
 		enum ParseAction {PARSEACTION_COUNT, PARSEACTION_SAVE};
