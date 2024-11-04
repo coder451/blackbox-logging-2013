@@ -58,4 +58,7 @@ Then run Trace2Log in the same directory as the blackbox files, passing
 
 The results are printed on the terminal.
 
+At the time of writing the exes are in x64\Debug under the sln 
+directory.
+
 
