@@ -227,25 +227,16 @@ namespace Gbp { namespace Tra {
 
 		static const int value = isBool | isEnum | isChar | isUchar | isWchar | 
 			isInteger | isFloat | 
-//			isCharPtr | isCharArray | 
-//			isWcharPtr | isWcharArray | 
 			isStdString | isStdWstring | 
 			isSzStringWrapper | isSzWStringWrapper |
 			isStdVector |
-//			isPointer | 
 			isPointerWrapper | 
-//			isArray |
 			isCountedArrayWrapper;
 
 		static const int hasVarLen = 
-			//			isCharPtr | isCharArray | 
-			//			isWcharPtr | isWcharArray | 
 			isStdString | isStdWstring | 
 			isSzStringWrapper | isSzWStringWrapper |
 			isStdVector |
-			//			isPointer | 
-			isPointerWrapper | 
-			//			isArray |
 			isCountedArrayWrapper;
 	};
 

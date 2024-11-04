@@ -94,7 +94,7 @@ namespace Gbp { namespace Tra {
 			}
 		}
 
-		// If we get here, we found nothing. Set p_ to zero to indicate the end.
+		// If we get here, we found nothing. Set p to zero to indicate the end.
 		// This compares equal with the iterator returned by end().
 		p = 0;
 	}

@@ -1,9 +1,10 @@
-#ifndef HEADER_Gbp_Tr_Tracer_h
-#define HEADER_Gbp_Tr_Tracer_h
+#ifndef HEADER_Gbp_Tra_Tracer_h
+#define HEADER_Gbp_Tra_Tracer_h
 #pragma once
 #include "./TraceSpec.h"
 #include "./Counter.h"
-#include "./TraceMacros.h"
+#include "./Ticker.h"
+#include <Mt/Threads.h>
 #include <vector>
 #include <stdio.h>
 
@@ -16,7 +17,8 @@ namespace Gbp { namespace Tra {
 		static Tracer* InitInstance(size_t size);
 		static void DestroyInstance();
 		static Sequence_t SequenceNumber(){return pInstance_->sequenceNumber();}
-		static bool Save(FILE* ft, FILE* fb);
+		static Time_t TickCount(){return pInstance_->tickCount();}
+		static bool Save(const std::string& baseName);
 		~Tracer();
 	private:
 		size_t size_;
@@ -27,11 +29,16 @@ namespace Gbp { namespace Tra {
 		// Provides a sequence number for each trace call
 		Counter seq_;
 
+		// Provides a simple time surrogate
+		Ticker ticker_;
+		Gbp::Mt::Threads<Ticker> tickerThread_;
+
 		Tracer(size_t size);
 		static Tracer* pInstance_;
 
 		Sequence_t sequenceNumber(){return seq_.increment();}
-		bool save(FILE* ft, FILE* fb);
+		Time_t tickCount() const {return ticker_.t();}
+		bool save(const std::string& baseName);
 	};
 }}
-#endif // HEADER_Gbp_Tr_Tracer_h
+#endif // HEADER_Gbp_Tra_Tracer_h

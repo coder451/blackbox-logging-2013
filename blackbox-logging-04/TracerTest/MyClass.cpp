@@ -4,15 +4,11 @@
 MyClass::MyClass(): n_(0)
 {
 	n_ = 1;
-// 	__declspec(allocate(".trace")) static Gbp::Tra::TraceSpec ts1 = {__FILE__, __LINE__, __FUNCTION__, 10, "%d", Gbp::Tra::TRACESPEC_MAGIC, 0};
-// 	ts1.pTraceDefn->trace(1);
-	TRACEF(10, "MyClass ctor");
+	TRACEF(10, "create");
 }
 
 MyClass::~MyClass()
 {
-// 	__declspec(allocate(".trace")) static Gbp::Tra::TraceSpec ts2 = {__FILE__, __LINE__, __FUNCTION__, 10, "%d", Gbp::Tra::TRACESPEC_MAGIC, 0};
-// 	ts2.pTraceDefn->trace(1);
-	TRACEF(10, "MyClass dtor");
+	TRACEF(10, "destroy");
 	n_ = 0;
 }

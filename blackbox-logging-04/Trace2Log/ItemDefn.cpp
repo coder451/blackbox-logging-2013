@@ -1,8 +1,16 @@
 #include "./ItemDefn.h"
 #include "./FmtSpec.h"
 #include "./TraceItem.h"
-#include <Tracer/Trace.h>
+#include <Tracer/TraceTypes.h>
 #pragma warning(disable:4996)
+namespace {
+	inline size_t SlotCount(size_t n)
+	{
+		size_t r = n % sizeof(Gbp::Tra::Slot_t);
+		if(r == 0) return n / sizeof(Gbp::Tra::Slot_t);
+		return (n + sizeof(Gbp::Tra::Slot_t) - r) / sizeof(Gbp::Tra::Slot_t);
+	}
+}
 namespace Gbp { namespace Tra {
 
 	ItemDefn::ItemDefn(		
@@ -71,7 +79,10 @@ namespace Gbp { namespace Tra {
 			Sequence_t thrId = buffer[pos];
 			pos = (pos < bufferSize_ - 1)? ++pos : 0;
 
-			TraceItemPtr spItem(new TraceItem(seq, thrId));
+			Time_t t = buffer[pos];
+			pos = (pos < bufferSize_ - 1)? ++pos : 0;
+
+			TraceItemPtr spItem(new TraceItem(this, seq, thrId, t));
 			traceItems_.push_back(spItem);
 
 			if(specCount_ == 0)

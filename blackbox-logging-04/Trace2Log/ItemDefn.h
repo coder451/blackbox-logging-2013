@@ -1,12 +1,12 @@
 #ifndef HEADER_Gbp_Tra_ItemDefn_h
 #define HEADER_Gbp_Tra_ItemDefn_h
 #pragma once
-#include <Tracer/TraceTypes.h>
 #include <string>
 #include <vector>
 #include <boost/shared_ptr.hpp>
 #include <stdio.h>
 namespace Gbp { namespace Tra {
+	typedef unsigned __int64 Slot_t;
 	class FmtSpec;
 	typedef boost::shared_ptr<FmtSpec> FmtSpecPtr;
 	class TraceItem;
@@ -34,6 +34,10 @@ namespace Gbp { namespace Tra {
 		void addFmtSpec(const FmtSpecPtr& spFmtSpec);
 		void load(const std::vector<Slot_t>& wholeBuffer);
 		void donateTraceItems(TraceItems&) const;
+		const std::string& file() const {return file_;}
+		int line() const {return line_;}
+		const std::string& function() const {return function_;}
+		const std::string& format() const {return format_;}
 	private:
 		size_t bufferOffset_;
 		size_t bufferSize_;

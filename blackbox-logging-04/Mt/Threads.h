@@ -12,7 +12,7 @@ namespace Gbp { namespace Mt {
 	class Threads
 	{
 	public:
-		Threads(size_t threadCount, T* pT):
+		Threads(size_t threadCount, T* pT = 0):
 		threadCount_(threadCount),
 		pT_(pT)
 		{
@@ -21,6 +21,8 @@ namespace Gbp { namespace Mt {
 		~Threads()
 		{
 		}
+
+		void setAction(T* pT) {pT_ = pT;}
 
 		bool create()
 		{

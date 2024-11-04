@@ -16,7 +16,7 @@ Gbp::Mt::ThreadFunctionReturn_t MyAction::threadFunc()
 	{
 		Sleep(100);
 		printf(".");
-		TRACEF(10, "i=%d", ++i);
+		TRACEF(10, "loop counter, i=%d", ++i);
 	}
 	return 0;
 }

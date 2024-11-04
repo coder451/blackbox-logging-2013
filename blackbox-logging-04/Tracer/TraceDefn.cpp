@@ -66,4 +66,8 @@ namespace Gbp { namespace Tra {
 	{
 		return Tracer::SequenceNumber();
 	}
+	Time_t TraceDefn::TickCount()
+	{
+		return Tracer::TickCount();
+	}
 }}

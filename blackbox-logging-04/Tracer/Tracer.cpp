@@ -2,13 +2,20 @@
 #include "./TraceSpec.h"
 #include "./TraceSpecs.h"
 #include "./TraceDefn.h"
-#include "./TracerEx.h"
+#include "./FileMgr.h"
+#include <Mt/Threads.h>
 #include <stdio.h>
 
 namespace Gbp { namespace Tra {
 	Tracer* Tracer::pInstance_ = 0;
 
-	Tracer::Tracer(size_t size): size_(size), buffer_()
+	Tracer::Tracer(size_t size): 
+	size_(size), 
+	buffer_(),
+	traceSpecVector_(),
+	seq_(),
+	ticker_(),
+	tickerThread_(1)
 	{
 		TraceSpecs traceSpecs;
 		if(!traceSpecs.isValid()) return;
@@ -64,6 +71,11 @@ namespace Gbp { namespace Tra {
 			ts.pTraceDefn = new TraceDefn(&ts, offset, p);
 			offset += ts.n;
 		}
+
+		// Start the ticker
+		tickerThread_.setAction(&ticker_);
+		tickerThread_.create();
+		tickerThread_.start();
 	}
 
 	Tracer::~Tracer()
@@ -74,23 +86,37 @@ namespace Gbp { namespace Tra {
 		}
 	}
 
-	bool Tracer::save(FILE* ft, FILE* fb)
+
+	bool Tracer::save(const std::string& baseName)
 	{
-		fprintf(ft, "Tracer BufferSize=%u DefnCount=%u\n", size_ / sizeof(Slot_t), traceSpecVector_.size());
-		for(TraceSpecVector::iterator i = traceSpecVector_.begin(); i != traceSpecVector_.end(); ++i)
 		{
-			bool r = (*i)->pTraceDefn->save(ft);
-			if(!r) 
+			FileMgr tfile(baseName, ".ttra", "w");
+			if(!tfile.isValid())
 			{
+				printf("Could not open ttra file.\n");
 				return false;
 			}
+
+			fprintf(tfile.f(), "Tracer BufferSize=%u DefnCount=%u\n", size_ / sizeof(Slot_t), traceSpecVector_.size());
+			for(TraceSpecVector::iterator i = traceSpecVector_.begin(); i != traceSpecVector_.end(); ++i)
+			{
+				bool r = (*i)->pTraceDefn->save(tfile.f());
+				if(!r) 
+				{
+					return false;
+				}
+			}
 		}
-		int r = fwrite(&buffer_[0], 1, buffer_.size(), fb);
-		if(r != buffer_.size())
+
+		FileMgr bfile(baseName, ".btra", "wb");
+		if(!bfile.isValid())
 		{
+			printf("Could not open btra file.\n");
 			return false;
 		}
-		return true;
+
+		int r = fwrite(&buffer_[0], 1, buffer_.size(), bfile.f());
+		return r == buffer_.size();
 	}
 
 	// Set up a singleton.
@@ -109,9 +135,9 @@ namespace Gbp { namespace Tra {
 		pInstance_ = 0;
 	}
 
-	bool Tracer::Save(FILE* ft, FILE* fb)
+	bool Tracer::Save(const std::string& baseName)
 	{
-		return pInstance_->save(ft, fb);
+		return pInstance_->save(baseName);
 	}
 
 }}

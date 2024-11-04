@@ -1,23 +1,24 @@
 // Turn a tracefile into a log file.
-#include <Tracer/Trace.h>
 #include "./ItemDefn.h"
 #include "./FmtSpec.h"
 #include "./TraceItem.h"
 #include <string>
 #include <stdio.h>
 
-using Gbp::Tra::Tracer;
-using Gbp::Tra::TracerEx;
 using Gbp::Tra::ItemDefn;
 using Gbp::Tra::ItemDefnPtr;
 using Gbp::Tra::FmtSpec;
 using Gbp::Tra::FmtSpecPtr;
-using Gbp::Tra::Slot_t;
 using Gbp::Tra::TraceItems;
 
 #pragma warning(disable: 4996)
 
 bool FilterTrace(FILE*, FILE*, FILE*);
+
+namespace Gbp { namespace Tra {
+	typedef unsigned __int64 Slot_t;
+}}
+using Gbp::Tra::Slot_t;
 
 int main(int argc, char* argv[])
 {

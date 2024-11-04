@@ -1,5 +1,5 @@
-#ifndef HEADER_Gbp_Tr_TraceDefn_h
-#define HEADER_Gbp_Tr_TraceDefn_h
+#ifndef HEADER_Gbp_Tra_TraceDefn_h
+#define HEADER_Gbp_Tra_TraceDefn_h
 #pragma once
 #include "./Mutex.h"
 #include "./FormatParser.h"
@@ -8,6 +8,7 @@
 #include "./TraceHelpers.h"
 #include "./SaveValue.h"
 #include "./SaveValueWrap.h"
+#include "./Ticker.h"
 #include <stdio.h>
 #include <Windows.h>
 
@@ -59,6 +60,7 @@ namespace Gbp { namespace Tra {
 
 	public:
 		static Sequence_t SequenceNumber();
+		static Time_t TickCount();
 		TraceDefn(TraceSpec* pTraceSpec, size_t offset, char*& pBuffer);
 		~TraceDefn();
 
@@ -66,23 +68,6 @@ namespace Gbp { namespace Tra {
 		bool save(FILE* f);
 
 		//////////////////////////////////////////////////////////////////////////
-
-		bool wrappedInLength(size_t length,  size_t& pos, Slot_t*& pWrite)
-		{
-			if(pos + SlotCount(sizeof(size_t)) > size_)
-			{
-				// wrap
-				pWrite = pBuffer0_;
-				SaveValue(pWrite, length);
-				pos = SlotCount(sizeof(length));
-				return true;
-			}
-			// Will not wrap here - just write it out.
-			SaveValue(pWrite, length);
-			pos += SlotCount(sizeof(size_t));
-			return false;
-		}
-
 
 		template <typename T>
 		bool wrappedInParam(const T& t, size_t& pos, Slot_t*& pWrite)
@@ -160,7 +145,7 @@ namespace Gbp { namespace Tra {
 		//////////////////////////////////////////////////////////////////////////
 		void trace()
 		{
-			static const size_t MinLength = 2;
+			static const size_t MinLength = 3;
 
 			MutexMgr m(mutex_);
 			if(count_ == 0) 
@@ -176,13 +161,15 @@ namespace Gbp { namespace Tra {
 			if(pos_ <= size_)
 			{
 				SaveValue(pWrite, SequenceNumber());
-TRACEDEFN_T:	SaveValue(pWrite, GetCurrentThreadId());
+TRACEDEFN_THRD:	SaveValue(pWrite, GetCurrentThreadId());
+TRACEDEFN_TIME:	SaveValue(pWrite, TickCount());
 				return;
 			}
 
 			pos_ -= size_;
-			if(wrappedInParam(SequenceNumber(), pos, pWrite)) goto TRACEDEFN_T;
-			wrappedInParam(GetCurrentThreadId(), pos, pWrite);
+			if(wrappedInParam(SequenceNumber(), pos, pWrite)) goto TRACEDEFN_THRD;
+			if(wrappedInParam(GetCurrentThreadId(), pos, pWrite)) goto TRACEDEFN_TIME;
+			wrappedInParam(TickCount(), pos, pWrite);
 		}
 
 
@@ -193,7 +180,7 @@ TRACEDEFN_T:	SaveValue(pWrite, GetCurrentThreadId());
 			(void) sizeof(Gbp::Tra::AreTraceable<T0>);
 			static const int HasArrays = ParamType<T0>::hasVarLen;
 			static const size_t ParamCount = 1;
-			static const size_t MinLength = 2 + ParamCount;
+			static const size_t MinLength = 3 + ParamCount;
 			static const int ParamTypes[ParamCount] = {ParamType<T0>::value, };
 			static const size_t ParamSizes[ParamCount] = {sizeof(T0), };
 
@@ -218,16 +205,18 @@ TRACEDEFN_T:	SaveValue(pWrite, GetCurrentThreadId());
 			if(pos_ <= size_)
 			{
 				if(HasArrays != 0) SaveValue(pWrite, length);
-TRACEDEFN_S:	SaveValue(pWrite, SequenceNumber());
-TRACEDEFN_T:	SaveValue(pWrite, GetCurrentThreadId());
+TRACEDEFN_SEQ :	SaveValue(pWrite, SequenceNumber());
+TRACEDEFN_THRD:	SaveValue(pWrite, GetCurrentThreadId());
+TRACEDEFN_TIME:	SaveValue(pWrite, TickCount());
 TRACEDEFN_0:	SaveValue(pWrite, t0);
 				return;
 			}
 
 			pos_ -= size_;
-			if(HasArrays != 0) if(wrappedInLength(length, pos, pWrite)) goto TRACEDEFN_S;
-			if(wrappedInParam(SequenceNumber(), pos, pWrite)) goto TRACEDEFN_T;
-			if(wrappedInParam(GetCurrentThreadId(), pos, pWrite)) goto TRACEDEFN_0;
+			if(HasArrays != 0) if(wrappedInParam(length, pos, pWrite)) goto TRACEDEFN_SEQ ;
+			if(wrappedInParam(SequenceNumber(), pos, pWrite)) goto TRACEDEFN_THRD;
+			if(wrappedInParam(GetCurrentThreadId(), pos, pWrite)) goto TRACEDEFN_TIME;
+			if(wrappedInParam(TickCount(), pos, pWrite)) goto TRACEDEFN_0;
 			wrappedInParam(t0, pos, pWrite);
 		}
 
@@ -238,9 +227,9 @@ TRACEDEFN_0:	SaveValue(pWrite, t0);
 			(void) sizeof(Gbp::Tra::AreTraceable<T0, T1>);
 			static const int HasArrays = ParamType<T0>::hasVarLen | ParamType<T1>::hasVarLen;
 			static const size_t ParamCount = 2;
-			static const size_t MinLength = 2 + ParamCount;
+			static const size_t MinLength = 3 + ParamCount;
 			static const int ParamTypes[ParamCount] = {ParamType<T0>::value, ParamType<T1>::value, };
-			static const int ParamSizes[ParamCount] = {sizeof(T0), sizeof(T1), };
+			static const size_t ParamSizes[ParamCount] = {sizeof(T0), sizeof(T1), };
 
 			size_t length = MinLength;
 			if(HasArrays != 0)
@@ -261,17 +250,19 @@ TRACEDEFN_0:	SaveValue(pWrite, t0);
 			if(pos_ <= size_)
 			{
 				if(HasArrays != 0) SaveValue(pWrite, length);
-TRACEDEFN_S:	SaveValue(pWrite, SequenceNumber());
-TRACEDEFN_T:	SaveValue(pWrite, GetCurrentThreadId());
+TRACEDEFN_SEQ :	SaveValue(pWrite, SequenceNumber());
+TRACEDEFN_THRD:	SaveValue(pWrite, GetCurrentThreadId());
+TRACEDEFN_TIME:	SaveValue(pWrite, TickCount());
 TRACEDEFN_0:	SaveValue(pWrite, t0);
 TRACEDEFN_1:	SaveValue(pWrite, t1);
 				return;
 			}
 
 			pos_ -= size_;
-			if(HasArrays != 0) if(wrappedInLength(length, pos, pWrite)) goto TRACEDEFN_S;
-			if(wrappedInParam(SequenceNumber(), pos, pWrite)) goto TRACEDEFN_T;
-			if(wrappedInParam(GetCurrentThreadId(), pos, pWrite)) goto TRACEDEFN_0;
+			if(HasArrays != 0) if(wrappedInParam(length, pos, pWrite)) goto TRACEDEFN_SEQ ;
+			if(wrappedInParam(SequenceNumber(), pos, pWrite)) goto TRACEDEFN_THRD;
+			if(wrappedInParam(GetCurrentThreadId(), pos, pWrite)) goto TRACEDEFN_TIME;
+			if(wrappedInParam(TickCount(), pos, pWrite)) goto TRACEDEFN_0;
 			if(wrappedInParam(t0, pos, pWrite)) goto TRACEDEFN_1;
 			wrappedInParam(t1, pos, pWrite);
 		}
@@ -283,7 +274,7 @@ TRACEDEFN_1:	SaveValue(pWrite, t1);
 			(void) sizeof(Gbp::Tra::AreTraceable<T0, T1, T2>);
 			static const int HasArrays = ParamType<T0>::hasVarLen | ParamType<T1>::hasVarLen | ParamType<T2>::hasVarLen;
 			static const size_t ParamCount = 3;
-			static const size_t MinLength = 2 + ParamCount;
+			static const size_t MinLength = 3 + ParamCount;
 			static const int ParamTypes[ParamCount] = {ParamType<T0>::value, ParamType<T1>::value, ParamType<T2>::value, };
 			static const size_t ParamSizes[ParamCount] = {sizeof(T0), sizeof(T1), sizeof(T2), };
 
@@ -307,8 +298,9 @@ TRACEDEFN_1:	SaveValue(pWrite, t1);
 			if(pos_ <= size_)
 			{
 				if(HasArrays != 0) SaveValue(pWrite, length);
-TRACEDEFN_S:	SaveValue(pWrite, SequenceNumber());
-TRACEDEFN_T:	SaveValue(pWrite, GetCurrentThreadId());
+TRACEDEFN_SEQ :	SaveValue(pWrite, SequenceNumber());
+TRACEDEFN_THRD:	SaveValue(pWrite, GetCurrentThreadId());
+TRACEDEFN_TIME:	SaveValue(pWrite, TickCount());
 TRACEDEFN_0:	SaveValue(pWrite, t0);
 TRACEDEFN_1:	SaveValue(pWrite, t1);
 TRACEDEFN_2:	SaveValue(pWrite, t2);
@@ -316,13 +308,14 @@ TRACEDEFN_2:	SaveValue(pWrite, t2);
 			}
 
 			pos_ -= size_;
-			if(HasArrays != 0) if(wrappedInLength(length, pos, pWrite)) goto TRACEDEFN_S;
-			if(wrappedInParam(SequenceNumber(), pos, pWrite)) goto TRACEDEFN_T;
-			if(wrappedInParam(GetCurrentThreadId(), pos, pWrite)) goto TRACEDEFN_0;
+			if(HasArrays != 0) if(wrappedInParam(length, pos, pWrite)) goto TRACEDEFN_SEQ ;
+			if(wrappedInParam(SequenceNumber(), pos, pWrite)) goto TRACEDEFN_THRD;
+			if(wrappedInParam(GetCurrentThreadId(), pos, pWrite)) goto TRACEDEFN_TIME;
+			if(wrappedInParam(TickCount(), pos, pWrite)) goto TRACEDEFN_0;
 			if(wrappedInParam(t0, pos, pWrite)) goto TRACEDEFN_1;
 			if(wrappedInParam(t1, pos, pWrite)) goto TRACEDEFN_2;
 			wrappedInParam(t2, pos, pWrite);
 		}
 	};
 }}
-#endif  // HEADER_Gbp_Tr_TraceDefn_h
+#endif  // HEADER_Gbp_Tra_TraceDefn_h
